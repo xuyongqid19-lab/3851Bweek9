@@ -1,0 +1,27 @@
+[
+  {
+    "file": "lib/pages/profile_page.dart",
+    "main_equals_common_ancestor": false,
+    "auth_changes": true
+  },
+  {
+    "file": "lib/pages/forgot_password_page.dart",
+    "main_equals_common_ancestor": true,
+    "auth_changes": true
+  },
+  {
+    "file": "lib/pages/register_page.dart",
+    "main_equals_common_ancestor": true,
+    "auth_changes": true
+  },
+  {
+    "file": "lib/services/auth_service.dart",
+    "main_equals_common_ancestor": true,
+    "auth_changes": true
+  },
+  {
+    "file": "auth-server/src/index.js",
+    "main_equals_common_ancestor": true,
+    "auth_changes": true
+  }
+]

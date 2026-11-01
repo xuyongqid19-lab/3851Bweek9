@@ -1,0 +1,15 @@
+name: global-village-public-stack
+
+services:
+  public-gateway:
+    image: nginx:1.27-alpine
+    container_name: global-village-public-gateway
+    ports:
+      - "127.0.0.1:8080:80"
+    volumes:
+      - ./build/web:/usr/share/nginx/html:ro
+      - ./public-gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./public-gateway/proxy_params:/etc/nginx/proxy_params:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped

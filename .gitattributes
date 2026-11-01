@@ -1,0 +1,2 @@
+# Keep this computer's editor SDK paths out of portable source archives.
+.vscode export-ignore

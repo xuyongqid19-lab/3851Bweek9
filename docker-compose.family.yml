@@ -1,0 +1,16 @@
+name: global-village-family-stack
+services:
+  family-api:
+    build: ./family-server
+    environment:
+      PORT: 3003
+      HOST: 0.0.0.0
+      AUTH_API_ME_URL: http://host.docker.internal:3002/auth/me
+      ALLOWED_ORIGINS: http://localhost:7357
+      FAMILY_DB_PATH: /app/data/family.sqlite
+    ports:
+      - "0.0.0.0:3003:3003"
+    volumes:
+      - family-data:/app/data
+volumes:
+  family-data:

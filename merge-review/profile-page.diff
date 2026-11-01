@@ -1,0 +1,32 @@
+diff --git a/lib/pages/profile_page.dart b/lib/pages/profile_page.dart
+index 6912581..8711ac8 100644
+--- a/lib/pages/profile_page.dart
++++ b/lib/pages/profile_page.dart
+@@ -4,6 +4,7 @@ import '../models/profile_model.dart';
+ import '../services/auth_service.dart';
+ import '../theme/app_theme.dart';
+ import 'login_page.dart';
++import 'change_password_page.dart';
+ 
+ class ProfilePage extends StatefulWidget {
+   const ProfilePage({super.key});
+@@ -287,6 +288,19 @@ class _MyProfileTabState extends State<_MyProfileTab> {
+             ],
+           ),
+           const SizedBox(height: 24),
++          Align(
++            alignment: Alignment.centerLeft,
++            child: TextButton.icon(
++              onPressed: () => Navigator.of(context).push(
++                MaterialPageRoute<void>(
++                  builder: (_) => const ChangePasswordPage(),
++                ),
++              ),
++              icon: const Icon(Icons.lock_outline, size: 18),
++              label: const Text('Change Password'),
++              style: TextButton.styleFrom(foregroundColor: AppTheme.ink),
++            ),
++          ),
+           if (_editing) ...[
+             _buildSectionTitle('Personal Information'),
+             const SizedBox(height: 12),

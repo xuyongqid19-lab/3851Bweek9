@@ -1,0 +1,36 @@
+name: global-village-chat-stack
+
+services:
+  chat-db:
+    image: postgres:16-alpine
+    container_name: global-village-chat-db
+    environment:
+      POSTGRES_DB: global_village_chat
+      POSTGRES_USER: global_village_chat
+      POSTGRES_PASSWORD: global_village_chat
+    ports:
+      - "127.0.0.1:5435:5432"
+    volumes:
+      - chat-db-data:/var/lib/postgresql/data
+      - ./chat-server/db/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U global_village_chat -d global_village_chat"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  chat-api:
+    build: ./chat-server
+    container_name: global-village-chat-api
+    environment:
+      PORT: 3004
+      DATABASE_URL: postgres://global_village_chat:global_village_chat@chat-db:5432/global_village_chat
+      AUTH_API_ME_URL: http://host.docker.internal:3002/auth/me
+    ports:
+      - "0.0.0.0:3004:3004"
+    depends_on:
+      chat-db:
+        condition: service_healthy
+
+volumes:
+  chat-db-data:

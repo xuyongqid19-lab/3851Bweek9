@@ -1,0 +1,4 @@
+ALTER TABLE users ADD COLUMN IF NOT EXISTS community text;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS address text;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS interests jsonb NOT NULL DEFAULT '[]';
+ALTER TABLE users ADD COLUMN IF NOT EXISTS custom_categories jsonb NOT NULL DEFAULT '{}';

@@ -1,0 +1,77 @@
+GLOBAL VILLAGE - PORTABLE WINDOWS TEST EDITION
+
+1. Extract the complete ZIP into a writable local folder, for example
+   C:\Users\YourName\Documents\GlobalVillage. Do not run inside the ZIP.
+2. Double-click Start.bat. Keep its console window open.
+3. The browser opens the local Quick Start page. Use a displayed test account
+   to log in. Open Family or Community to check the actual application.
+4. Run Check.bat to check the services, login and authenticated API reads.
+5. Run Stop.bat, or press Ctrl+C in the launcher, before copying the folder.
+
+REQUIREMENTS
+Windows 10/11 x64, a current Edge/Chrome browser, a writable local folder.
+No Flutter, Android SDK, Node.js installation, PostgreSQL installation,
+Docker or first-run download is required. Normal startup needs no administrator.
+If Microsoft Visual C++ x64 Runtime is missing, run the included
+Install-Windows-Runtime.bat once, review the Microsoft license and approve
+the Windows installer, then retry Start.bat. That optional setup may need
+administrator approval. The launcher never accepts the license for you.
+The bundled runtime files must remain together. Enterprise security policy
+may block unknown executables: ask the device administrator to review them.
+No launcher action disables security settings or adds firewall exceptions.
+
+WHAT RUNS
+The real Flutter Web build plus Auth, Community, Chat and Family APIs.
+This is a browser-based functional preview, not an Android emulator.
+The package includes the merged source and locally bundled runtimes.
+No previous developer accounts or database files are distributed.
+
+FIRST RUN AND SAVING
+The first run initializes separate PostgreSQL databases and a Family SQLite
+database under data/. It creates Demo Parent and Demo Uncle accounts with
+random passwords, and two sample families. Later runs preserve changes.
+The Quick Start page shows the current local test credentials.
+Community seed records come from the teammate's original SQL.
+If you intentionally remove demo accounts or change their passwords,
+Check.bat may fail its demo-login check. Normal new-account login still works.
+
+OFFLINE AND EXTERNAL FEATURES
+Local registration/login, Family records and Community API operations work
+without Internet. Flutter rendering resources are included locally.
+Google login, map tiles and some location functions need Internet/configuration.
+Google consent, microphone/location permissions and Android-specific behavior
+are not validated just by running this preview. Automatic/exercise check-ins
+are not implemented; manual check-ins use UTC dates.
+
+PORTS AND MULTIPLE COPIES
+Only loopback connections are accepted. Web starts on port 7357, falling
+back through 7377 if needed. APIs and database use available local ports.
+Reopening Start.bat opens the existing instance for this folder.
+Google OAuth may require the selected origin in the owner's Cloud Console.
+
+MOVING TO ANOTHER COMPUTER
+For a clean test, transfer the original ZIP and extract it on Windows x64.
+To carry your test records, stop first, then copy the entire extracted folder
+including data/. That folder includes account details and private local keys.
+Do not share a used data/ directory unless you intend to share those records.
+Changing the URL/port may require logging in again due to browser storage.
+Use a short local path if Windows reports long-path extraction errors.
+Chinese paths use Windows short-path aliases for PostgreSQL. On a drive
+without these aliases, the launcher asks you to use an English-only path.
+
+TROUBLESHOOTING
+Keep the console error and the files under logs/ when reporting a failure.
+Do not manually delete database files to resolve startup errors.
+If the console was force-closed and it reports an already running database,
+restart Windows before retrying. Stop.bat is the recommended normal shutdown.
+The data folder is independent of the developer's original work/ database.
+
+Third-party licenses remain beside Node, PostgreSQL and backend packages.
+Flutter notices are available in web/assets/NOTICES.
+
+OCTOBER EDITION
+Includes the latest team integration and Family tree with a large pan/zoom
+canvas. Open Family > Family tree > Open large tree. Use Requests and
+Manage to link groups with approval from all affected family administrators.
+Chat and friends use their own bundled local database. Email delivery needs
+an external SMTP configuration and is not enabled in this offline test copy.

@@ -1,0 +1,52 @@
+name: global-village-auth-stack
+
+services:
+  auth-db:
+    image: postgres:16-alpine
+    container_name: global-village-auth-db
+    environment:
+      POSTGRES_DB: global_village_auth
+      POSTGRES_USER: global_village_auth
+      POSTGRES_PASSWORD: global_village_auth
+    ports:
+      - "127.0.0.1:5434:5432"
+    volumes:
+      - auth-db-data:/var/lib/postgresql/data
+      - ./auth-server/db/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U global_village_auth -d global_village_auth"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  auth-api:
+    build: ./auth-server
+    container_name: global-village-auth-api
+    environment:
+      PORT: 3001
+      DATABASE_URL: postgres://global_village_auth:global_village_auth@auth-db:5432/global_village_auth
+      GOOGLE_WEB_CLIENT_ID: 848686154651-a5lrjn63ggqj83g5ob4bms7imqd6jkth.apps.googleusercontent.com
+      JWT_SECRET: ${JWT_SECRET:-global-village-local-dev-secret-change-before-production}
+      SMTP_HOST: ${SMTP_HOST:-smtp.qq.com}
+      SMTP_PORT: ${SMTP_PORT:-465}
+      SMTP_SECURE: ${SMTP_SECURE:-true}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      RESET_CODE_SECRET: ${RESET_CODE_SECRET:-}
+    ports:
+      - "0.0.0.0:3002:3001"
+    depends_on:
+      auth-db:
+        condition: service_healthy
+
+  auth-adminer:
+    image: adminer:4.8.1
+    container_name: global-village-auth-adminer
+    ports:
+      - "127.0.0.1:8082:8080"
+    depends_on:
+      auth-db:
+        condition: service_healthy
+
+volumes:
+  auth-db-data:

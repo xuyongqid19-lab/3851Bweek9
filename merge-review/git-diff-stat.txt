@@ -1,0 +1,15 @@
+ auth-server/src/change-password.js                   |  48 +++++++
+ auth-server/src/index.js                             |  19 +++
+ auth-server/src/password-security.js                 |  92 +++++++++++++
+ auth-server/src/security-question-reset.js           | 125 +++++++++++++++++
+ auth-server/src/security-question-schema.sql         |  13 ++
+ auth-server/test/account-password-security.test.js   | 283 +++++++++++++++++++++++++++++++++++++++
+ auth-server/test/production-auth.integration.test.js | 111 +++++++++++++++
+ lib/pages/change_password_page.dart                  | 142 ++++++++++++++++++++
+ lib/pages/forgot_password_page.dart                  | 198 ++++++++++++++++++++++++++-
+ lib/pages/profile_page.dart                          |  14 ++
+ lib/pages/register_page.dart                         |   8 ++
+ lib/services/auth_service.dart                       |  47 ++++++-
+ test/account_password_pages_test.dart                | 157 ++++++++++++++++++++++
+ test/profile_change_password_entry_test.dart         |  42 ++++++
+ 14 files changed, 1295 insertions(+), 4 deletions(-)
